@@ -6,6 +6,7 @@ import { Ticket } from '../../../models/ticket';
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.scss']
 })
+
 export class TicketComponent implements OnInit {
 
   /**
@@ -18,6 +19,12 @@ export class TicketComponent implements OnInit {
   @Output()
   ticketHasBeenSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Output()
+  ticketToDelete: EventEmitter<Ticket> = new EventEmitter<Ticket>();
+
+  @Output()
+  ticketToArchive: EventEmitter<Ticket> = new EventEmitter<Ticket>();
+
   constructor() {
   }
 
@@ -27,4 +34,13 @@ export class TicketComponent implements OnInit {
   selectTicket() {
     this.ticketHasBeenSelected.emit(true);
   }
+
+  deleteTicket(ticket: Ticket) {
+    this.ticketToDelete.emit(this.ticket);
+  }
+
+  archiveTicket(ticket: Ticket) {
+    this.ticketToArchive.emit(this.ticket);
+  }
+
 }
